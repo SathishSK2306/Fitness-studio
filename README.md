@@ -2,33 +2,47 @@
 
 A responsive, animated one-page website for **Focus Fitness Studio**, Taramani, Chennai.
 
-It is plain HTML, CSS and JavaScript, so there is nothing to install and no build step.
-
-## Files
-
-| File | What it is |
-|------|------------|
-| `index.html` | Page content (all sections) |
-| `styles.css` | Design, animations, responsive layout |
-| `script.js` | Scroll animations, menu, counters, review slider, WhatsApp form |
-| `favicon.svg` | Browser tab icon |
+Built with **React 18 + Vite**, **Framer Motion** (animations), **Lenis** (smooth scrolling) and **Lucide** icons.
 
 ## Run locally (VS Code)
 
-1. Open this folder in VS Code.
-2. Install the **Live Server** extension.
-3. Right-click `index.html` and choose **Open with Live Server**.
+You need [Node.js](https://nodejs.org) 18 or newer.
 
-Or, from a terminal: `npx serve .`
+```bash
+npm install      # first time only
+npm run dev      # starts the site at http://localhost:5173
+```
+
+Other commands:
+
+```bash
+npm run build    # production build into dist/
+npm run preview  # preview the production build
+```
+
+## Project structure
+
+```
+index.html              page shell (title, SEO meta, fonts)
+public/favicon.svg      browser tab icon
+src/
+  main.jsx              React entry
+  App.jsx               page layout + smooth scroll setup
+  data.js               ALL the gym's content: phone, address, services, reviews, images
+  index.css             design, colours, responsive layout
+  lib/scroll.js         smooth-scroll helpers used by the menu
+  components/           one file per section (Navbar, Hero, About, Services, ...)
+```
+
+## Editing content
+
+Almost everything lives in **`src/data.js`**: phone, WhatsApp number, address, services, reviews and photo links.
+
+- **Photos:** the site uses Unsplash stock photos. To use real studio photos, put them in `public/images/` and change the links in `IMAGES` in `src/data.js` (for example `"/images/hero.jpg"`).
+- **Colours:** change `--accent` at the top of `src/index.css`.
 
 ## Deploy on Vercel
 
 1. Go to https://vercel.com/new and import this GitHub repository.
-2. Framework preset: **Other**. Leave the build command and output directory empty.
-3. Click **Deploy**.
-
-## Editing content
-
-- **Phone / WhatsApp:** search for `919176443433` in `index.html` and `script.js`.
-- **Photos:** the site uses Unsplash stock photos. Replace the `src` of the `<img>` tags with real photos of the studio (put them in an `images/` folder, e.g. `images/hero.jpg`).
-- **Colours:** change `--accent` at the top of `styles.css`.
+2. Vercel detects **Vite** automatically (build command `npm run build`, output `dist`).
+3. Click **Deploy**. Every push to `main` redeploys the site.
